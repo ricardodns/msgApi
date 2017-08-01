@@ -4,9 +4,14 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Message = require('./api/models/msgModel'),
   bodyParser = require('body-parser');
-  
+
+var uristring =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/msgdb';
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/msgdb'); 
+mongoose.connect(uristring);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,6 +21,7 @@ app.get('/test', function(req, res) { res.json({data : 'hello'});})
 var routes = require('./api/routes/msgRoutes');
 routes(app);
 
-app.listen(port);
-
-console.log('Message RESTful API server started on: ' + port);
+var server = app.listen(port, function () {
+  var port = server.address().port;
+  console.log('Message RESTful API server started on: ' + port);
+});
