@@ -10,6 +10,7 @@ var uristring =
   process.env.MONGOHQ_URL ||
   'mongodb://localhost/msgdb';
 
+console.log(uristring);
 mongoose.Promise = global.Promise;
 mongoose.connect(uristring);
 
