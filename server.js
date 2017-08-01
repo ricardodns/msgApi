@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 app.get('/test', function(req, res) { res.json({data : 'hello'});})
 
+
 var routes = require('./api/routes/msgRoutes');
 routes(app);
 
