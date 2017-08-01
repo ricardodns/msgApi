@@ -7,7 +7,7 @@ var express = require('express'),
 
 var uristring =
   process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
+  process.env.MONGODB_URI ||
   'mongodb://localhost/msgdb';
 
 mongoose.Promise = global.Promise;
